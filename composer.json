@@ -1,0 +1,19 @@
+{
+    "name": "happyr/deferred-event-simple-bus-bundle",
+    "type": "symfony-bundle",
+    "description": "Bundle to use the Happyr deferred event worker with simple bus",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tobias Nyholm",
+            "email": "tobias.nyholm@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "autoload": {
+        "psr-4": { "Happyr\\DeferredEventSimpleBusBundle\\": "" }
+    }
+}
+

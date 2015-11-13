@@ -1,0 +1,21 @@
+
+services:
+  happyr.deferred_event_simple_bus.service.message_serializer:
+    class: Happyr\DeferredEventSimpleBusBundle\Service\MessageSerializer
+    configurator: [ "@happyr.deferred_event_simple_bus.dependency_injection.message_header_configurator" , configure]
+    arguments: [~, ~]
+
+  happyr.deferred_event_simple_bus.dependency_injection.message_header_configurator:
+      class: Happyr\DeferredEventSimpleBusBundle\DependencyInjection\Configurator\MessageHeaderConfigurator
+      public: false
+      arguments:
+          - @kernel
+          - %kernel.root_dir%
+
+  happyr.deferred_event_simple_bus.consumer_wrapper:
+    class: Happyr\DeferredEventSimpleBusBundle\Service\ConsumerWrapper
+    arguments:
+      - @simple_bus.asynchronous.standard_serialized_command_envelope_consumer
+      - @simple_bus.asynchronous.standard_serialized_event_envelope_consumer
+      - ~
+      - ~
