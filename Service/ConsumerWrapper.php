@@ -4,9 +4,8 @@ namespace Happyr\DeferredEventSimpleBusBundle\Service;
 
 use Happyr\DeferredEventSimpleBusBundle\Traits\LoggerTrait;
 use SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
-class ConsumerWrapper extends ContainerAwareCommand
+class ConsumerWrapper
 {
     use LoggerTrait;
 
@@ -60,8 +59,6 @@ class ConsumerWrapper extends ContainerAwareCommand
             $this->commandConsumer->consume($message);
         }
 
-        $this->getContainer()
-             ->get('logger')
-             ->log('debug', 'Consumed '.$queueName);
+        $this->log('debug', 'Consumed '.$queueName.'.');
     }
 }

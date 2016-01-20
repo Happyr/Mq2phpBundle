@@ -11,15 +11,15 @@ $paths = array(
     'vendor' => __DIR__.'/../../../../../../../app/',
 );
 
-$app_path = null;
+$appPath = null;
 
 $files = ['autoload.php', 'bootstrap.php.cache', 'AppKernel.php'];
 
 foreach ($paths as $path) {
     foreach ($files as $file) {
-        $app_path = (@include_once $path.$file);
+        $appPath = (@include_once $path.$file);
     }
-    if ($app_path !== false) {
+    if ($appPath !== false) {
         break;
     }
 }
@@ -56,7 +56,7 @@ foreach ($lines as $i => $line) {
     $headers[$name] = trim($value);
 }
 
-$input = new ArgvInput([$app_path.'console', 'happyr:deferred-message:dispatch', $headers['queue_name'], $body]);
+$input = new ArgvInput([$appPath.'console', 'happyr:deferred-message:dispatch', $headers['queue_name'], $body]);
 
 $kernel = new AppKernel('prod', false);
 $application = new Application($kernel);

@@ -4,9 +4,6 @@ namespace Happyr\DeferredEventSimpleBusBundle\Traits;
 
 use Psr\Log\LoggerInterface;
 
-/**
- * @author Tobias Nyholm <tobias.nyholm@gmail.com>
- */
 trait LoggerTrait
 {
     /**
