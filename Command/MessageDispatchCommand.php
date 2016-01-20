@@ -2,7 +2,6 @@
 
 namespace Happyr\DeferredEventSimpleBusBundle\Command;
 
-use Happyr\DeferredEventSimpleBusBundle\Traits\LoggerTrait;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
@@ -10,8 +9,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MessageDispatchCommand extends ContainerAwareCommand
 {
-    use LoggerTrait;
-
     protected function configure()
     {
         $this
@@ -28,7 +25,8 @@ class MessageDispatchCommand extends ContainerAwareCommand
 
         $queueName = $input->getArgument('queue');
 
-        $this->log('debug', 'Message received.');
+        $logger = $container->get('logger');
+        $logger->log('debug', 'Consummation begins');
         $container->get('happyr.deferred_event_simple_bus.consumer_wrapper')->consume($queueName, $input->getArgument('data'));
     }
 }

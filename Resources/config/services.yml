@@ -14,6 +14,8 @@ services:
 
   happyr.deferred_event_simple_bus.consumer_wrapper:
     class: Happyr\DeferredEventSimpleBusBundle\Service\ConsumerWrapper
+    calls:
+       - [setLogger, ["@logger"]]
     arguments:
       - @simple_bus.asynchronous.standard_serialized_command_envelope_consumer
       - @simple_bus.asynchronous.standard_serialized_event_envelope_consumer
