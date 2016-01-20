@@ -2,10 +2,13 @@
 
 namespace Happyr\DeferredEventSimpleBusBundle\Service;
 
+use Happyr\DeferredEventSimpleBusBundle\Traits\LoggerTrait;
 use SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer;
 
 class ConsumerWrapper
 {
+    use LoggerTrait;
+
     /**
      * @var SerializedEnvelopeConsumer
      */
@@ -50,14 +53,12 @@ class ConsumerWrapper
      */
     public function consume($queueName, $message)
     {
-        // TODO Dispatch event
-
         if ($queueName === $this->eventQueueName) {
             $this->eventConsumer->consume($message);
         } elseif ($queueName === $this->commandQueueName) {
             $this->commandConsumer->consume($message);
         }
 
-        // TODO log this
+        $this->log('debug', 'Consumed '.$queueName.'.');
     }
 }
