@@ -16,4 +16,3 @@
         "psr-4": { "Happyr\\DeferredEventSimpleBusBundle\\": "" }
     }
 }
-
