@@ -25,8 +25,7 @@ class MessageDispatchCommand extends ContainerAwareCommand
 
         $queueName = $input->getArgument('queue');
 
-        $logger = $container->get('logger');
-        $logger->log('debug', 'Consummation begins');
+        $container->get('logger')->log('info', 'Consuming data from queue: '. $queueName);
         $container->get('happyr.deferred_event_simple_bus.consumer_wrapper')->consume($queueName, $input->getArgument('data'));
     }
 }

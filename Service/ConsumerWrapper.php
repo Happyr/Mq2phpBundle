@@ -2,13 +2,17 @@
 
 namespace Happyr\DeferredEventSimpleBusBundle\Service;
 
-use Happyr\DeferredEventSimpleBusBundle\Traits\LoggerTrait;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerInterface;
 use SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer;
 
-class ConsumerWrapper
+/**
+ * This class deligates a message to the CommandConsumer or EventConsumer depending on the queue name.
+ *
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ */
+class ConsumerWrapper implements LoggerAwareInterface
 {
-    use LoggerTrait;
-
     /**
      * @var SerializedEnvelopeConsumer
      */
@@ -28,6 +32,11 @@ class ConsumerWrapper
      * @var string
      */
     private $eventQueueName;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
 
     /**
      * @param SerializedEnvelopeConsumer $commandConsumer
@@ -59,6 +68,22 @@ class ConsumerWrapper
             $this->commandConsumer->consume($message);
         }
 
-        $this->log('debug', 'Consumed '.$queueName.'.');
+        $this->log('info', 'Consumed '.$queueName.'.');
+    }
+
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
+    /**
+     * @param $level
+     * @param $message
+     */
+    private function log($level, $message)
+    {
+        if ($this->logger) {
+            $this->log($level, $message);
+        }
     }
 }
