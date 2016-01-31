@@ -44,7 +44,7 @@ if ($data === null) {
     exit(1);
 }
 
-// Decode the message ang get the data
+// Decode the message and get the data
 $message = base64_decode($data);
 $headers = array();
 $body = null;
@@ -58,7 +58,7 @@ foreach ($lines as $i => $line) {
     $headers[$name] = trim($value);
 }
 
-// Prepare to call a  Symfony command
+// Prepare to call a Symfony command
 $input = new ArgvInput([$appPath.'console', 'happyr:deferred-message:dispatch', $headers['queue_name'], $body]);
 
 $kernel = new AppKernel('prod', false);

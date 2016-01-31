@@ -62,15 +62,20 @@ class ConsumerWrapper implements LoggerAwareInterface
      */
     public function consume($queueName, $message)
     {
+        $this->log('info', sprintf('Consuming data from queue: %s', $queueName));
+
         if ($queueName === $this->eventQueueName) {
             $this->eventConsumer->consume($message);
+            $this->log('info', sprintf('Data from queue %s was consumed by the event consumer', $queueName));
         } elseif ($queueName === $this->commandQueueName) {
             $this->commandConsumer->consume($message);
+            $this->log('info', sprintf('Data from queue %s was consumed by the command consumer', $queueName));
         }
-
-        $this->log('info', 'Consumed '.$queueName.'.');
     }
 
+    /**
+     * @param LoggerInterface $logger
+     */
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;

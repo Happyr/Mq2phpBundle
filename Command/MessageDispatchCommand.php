@@ -7,6 +7,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * A command that wil be called by dispatch-message.php.
+ * It will give a SimpleBus message envelope to the ConsumerWrapper.
+ *
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ */
 class MessageDispatchCommand extends ContainerAwareCommand
 {
     protected function configure()
@@ -21,11 +27,9 @@ class MessageDispatchCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $container = $this->getContainer();
-
-        $queueName = $input->getArgument('queue');
-
-        $container->get('logger')->log('info', 'Consuming data from queue: '. $queueName);
-        $container->get('happyr.deferred_event_simple_bus.consumer_wrapper')->consume($queueName, $input->getArgument('data'));
+        $this->getContainer()->get('happyr.deferred_event_simple_bus.consumer_wrapper')->consume(
+            $input->getArgument('queue'),
+            $input->getArgument('data')
+        );
     }
 }
