@@ -23,10 +23,10 @@ class MessageSerializerDecorator implements MessageInEnvelopSerializer, HeaderAw
     private $headers;
 
     /**
-     * @param StandardMessageInEnvelopeSerializer $serializer
-     * @param array                               $headers
+     * @param MessageInEnvelopSerializer $serializer
+     * @param array                      $headers
      */
-    public function __construct(StandardMessageInEnvelopeSerializer $serializer, array $headers = array())
+    public function __construct(MessageInEnvelopSerializer $serializer, array $headers = array())
     {
         $this->serializer = $serializer;
         $this->headers = $headers;

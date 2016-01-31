@@ -1,12 +1,12 @@
 
 services:
-  happyr.mq2php.service.message_serializer:
+  happyr.mq2php.message_serializer:
     class: Happyr\Mq2phpBundle\Service\MessageSerializerDecorator
-    configurator: [ "@happyr.mq2php.dependency_injection.message_header_configurator" , configure]
-    arguments: ["@happyr.mq2php.service.message_serializer.inner", ~]
+    configurator: [ "@happyr.mq2php.di.message_header_configurator" , configure]
+    arguments: ["@happyr.mq2php.message_serializer.inner", ~]
     decorates: 'simple_bus.asynchronous.message_serializer'
 
-  happyr.mq2php.dependency_injection.message_header_configurator:
+  happyr.mq2php.di.message_header_configurator:
       class: Happyr\Mq2phpBundle\DependencyInjection\Configurator\MessageHeaderConfigurator
       public: false
       arguments:
