@@ -6,7 +6,7 @@ use Happyr\DeferredEventSimpleBusBundle\Service\HeaderAwareInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
- * Class MessageHeaderConfigurator.
+ * A configurator that will configure the MessageSerialiserDecorator with the mandatory headers.
  *
  * @author Tobias Nyholm
  */

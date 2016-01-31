@@ -6,11 +6,11 @@ use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer;
 use SimpleBus\Serialization\Envelope\Serializer\StandardMessageInEnvelopeSerializer;
 
 /**
- * This service adds some extra headers on the message.
+ * This service adds some extra headers on the message envelope.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class MessageSerializer implements MessageInEnvelopSerializer, HeaderAwareInterface
+class MessageSerializerDecorator implements MessageInEnvelopSerializer, HeaderAwareInterface
 {
     /**
      * @var StandardMessageInEnvelopeSerializer
@@ -33,7 +33,8 @@ class MessageSerializer implements MessageInEnvelopSerializer, HeaderAwareInterf
     }
 
     /**
-     * Serialize a Message by wrapping it in an Envelope and serializing the envelope.
+     * Serialize a Message by wrapping it in an Envelope and serializing the envelope. This will take the
+     * SimpleBus envelope and add it as body on a HTTP-like message.
      *
      * {@inheritdoc}
      */

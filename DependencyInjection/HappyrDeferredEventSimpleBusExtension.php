@@ -25,17 +25,30 @@ class HappyrDeferredEventSimpleBusExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $container->setParameter('happyr_deferred_event_simple_bus_enabled', $config['enabled']);
         $this->requireBundle('SimpleBusAsynchronousBundle', $container);
 
-        $def = $container->getDefinition('happyr.deferred_event_simple_bus.service.message_serializer');
-        $def->replaceArgument(1, $config['message_headers']);
-
+        // Add the command and event queue names to the consumer wrapper
         $def = $container->getDefinition('happyr.deferred_event_simple_bus.consumer_wrapper');
         $def->replaceArgument(2, $config['command_queue'])
             ->replaceArgument(3, $config['event_queue']);
+
+        $serializerId = 'happyr.deferred_event_simple_bus.service.message_serializer';
+        if (!$config['enabled']) {
+            $container->removeDefinition($serializerId);
+            return;
+        }
+
+        // Add default headers to the serializer
+        $def = $container->getDefinition($serializerId);
+        $def->replaceArgument(1, $config['message_headers']);
     }
 
+    /**
+     * Make sure we have activated the required bundles.
+     *
+     * @param $bundleName
+     * @param ContainerBuilder $container
+     */
     private function requireBundle($bundleName, ContainerBuilder $container)
     {
         $enabledBundles = $container->getParameter('kernel.bundles');
