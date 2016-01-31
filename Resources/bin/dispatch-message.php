@@ -59,7 +59,7 @@ foreach ($lines as $i => $line) {
 }
 
 // Prepare to call a Symfony command
-$input = new ArgvInput([$appPath.'console', 'happyr:deferred-message:dispatch', $headers['queue_name'], $body]);
+$input = new ArgvInput([$appPath.'console', 'happyr:mq2php:dispatch', $headers['queue_name'], $body]);
 
 $kernel = new AppKernel('prod', false);
 $application = new Application($kernel);

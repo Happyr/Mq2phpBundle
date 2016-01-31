@@ -1,7 +1,7 @@
 {
-    "name": "happyr/deferred-event-simple-bus-bundle",
+    "name": "happyr/mq2php-bundle",
     "type": "symfony-bundle",
-    "description": "Bundle to use the Happyr deferred event worker with simple bus",
+    "description": "Automatically consume messages from a message queue without using a cron. Works great with SimpleBus",
     "license": "MIT",
     "authors": [
         {
@@ -14,6 +14,6 @@
         "psr/log": "~1.0"
     },
     "autoload": {
-        "psr-4": { "Happyr\\DeferredEventSimpleBusBundle\\": "" }
+        "psr-4": { "Happyr\\Mq2phpBundle\\": "" }
     }
 }
