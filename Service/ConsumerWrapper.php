@@ -88,7 +88,7 @@ class ConsumerWrapper implements LoggerAwareInterface
     private function log($level, $message)
     {
         if ($this->logger) {
-            $this->log($level, $message);
+            $this->logger->log($level, $message);
         }
     }
 }
