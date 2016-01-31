@@ -1,20 +1,20 @@
 
 services:
-  happyr.deferred_event_simple_bus.service.message_serializer:
-    class: Happyr\DeferredEventSimpleBusBundle\Service\MessageSerializerDecorator
-    configurator: [ "@happyr.deferred_event_simple_bus.dependency_injection.message_header_configurator" , configure]
-    arguments: ["@happyr.deferred_event_simple_bus.service.message_serializer.inner", ~]
+  happyr.mq2php.service.message_serializer:
+    class: Happyr\Mq2phpBundle\Service\MessageSerializerDecorator
+    configurator: [ "@happyr.mq2php.dependency_injection.message_header_configurator" , configure]
+    arguments: ["@happyr.mq2php.service.message_serializer.inner", ~]
     decorates: 'simple_bus.asynchronous.message_serializer'
 
-  happyr.deferred_event_simple_bus.dependency_injection.message_header_configurator:
-      class: Happyr\DeferredEventSimpleBusBundle\DependencyInjection\Configurator\MessageHeaderConfigurator
+  happyr.mq2php.dependency_injection.message_header_configurator:
+      class: Happyr\Mq2phpBundle\DependencyInjection\Configurator\MessageHeaderConfigurator
       public: false
       arguments:
           - @kernel
           - %kernel.root_dir%
 
-  happyr.deferred_event_simple_bus.consumer_wrapper:
-    class: Happyr\DeferredEventSimpleBusBundle\Service\ConsumerWrapper
+  happyr.mq2php.consumer_wrapper:
+    class: Happyr\Mq2phpBundle\Service\ConsumerWrapper
     calls:
        - [setLogger, ["@?logger"]]
     arguments:

@@ -1,6 +1,6 @@
 <?php
 
-namespace Happyr\DeferredEventSimpleBusBundle\Service;
+namespace Happyr\Mq2phpBundle\Service;
 
 use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer;
 use SimpleBus\Serialization\Envelope\Serializer\StandardMessageInEnvelopeSerializer;

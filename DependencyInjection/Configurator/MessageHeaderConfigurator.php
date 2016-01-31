@@ -1,8 +1,8 @@
 <?php
 
-namespace Happyr\DeferredEventSimpleBusBundle\DependencyInjection\Configurator;
+namespace Happyr\Mq2phpBundle\DependencyInjection\Configurator;
 
-use Happyr\DeferredEventSimpleBusBundle\Service\HeaderAwareInterface;
+use Happyr\Mq2phpBundle\Service\HeaderAwareInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
@@ -44,7 +44,7 @@ class MessageHeaderConfigurator
         if ($service->getHeader('dispatch_path') === null) {
             $service->setHeader(
                 'dispatch_path',
-                $this->kernel->locateResource('@HappyrDeferredEventSimpleBusBundle/Resources/bin/dispatch-message.php')
+                $this->kernel->locateResource('@HappyrMq2phpBundle/Resources/bin/dispatch-message.php')
             );
         }
     }

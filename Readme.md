@@ -1,4 +1,4 @@
-# DeferredEventSimpleBusBundle
+# Mq2phpBundle
 
 This bundle make the asynchronous messages independent of a cron job to consume the messages. Instead we utilize the 
 power of PHP-FPM to schedule workload and resources. 
@@ -8,7 +8,7 @@ power of PHP-FPM to schedule workload and resources.
 Install and enable this bundle
 
 ```bash
-comopser require happyr/deferred-event-simple-bus-bundle
+comopser require happyr/mq2php-bundle
 ```
 
 ```php
@@ -18,7 +18,7 @@ class AppKernel extends Kernel
   {
     $bundles = array(
         // ...
-        new Happyr\DeferredEventSimpleBusBundle\HappyrDeferredEventSimpleBusBundle(),
+        new Happyr\Mq2phpBundle\HappyrMq2phpBundle(),
     }
   }
 }
@@ -45,7 +45,7 @@ simple_bus_rabbit_mq_bundle_bridge:
   events:
     producer_service_id: old_sound_rabbit_mq.asynchronous_events_producer
     
-happyr_deferred_event_simple_bus:
+happyr_mq2php:
   enabled: true
   command_queue: 'asynchronous_commands' # The name of the RabbitMQ queue for commands
   event_queue: 'asynchronous_events' # The name of the RabbitMQ queue for events

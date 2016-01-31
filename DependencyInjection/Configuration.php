@@ -1,6 +1,6 @@
 <?php
 
-namespace Happyr\DeferredEventSimpleBusBundle\DependencyInjection;
+namespace Happyr\Mq2phpBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -16,7 +16,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $root = $treeBuilder->root('happyr_deferred_event_simple_bus');
+        $root = $treeBuilder->root('happyr_mq2php');
 
         $root
             ->children()

@@ -1,6 +1,6 @@
 <?php
 
-namespace Happyr\DeferredEventSimpleBusBundle\DependencyInjection;
+namespace Happyr\Mq2phpBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class HappyrDeferredEventSimpleBusExtension extends Extension
+class HappyrMq2phpExtension extends Extension
 {
     /**
      * {@inheritdoc}
@@ -28,11 +28,11 @@ class HappyrDeferredEventSimpleBusExtension extends Extension
         $this->requireBundle('SimpleBusAsynchronousBundle', $container);
 
         // Add the command and event queue names to the consumer wrapper
-        $def = $container->getDefinition('happyr.deferred_event_simple_bus.consumer_wrapper');
+        $def = $container->getDefinition('happyr.mq2php.consumer_wrapper');
         $def->replaceArgument(2, $config['command_queue'])
             ->replaceArgument(3, $config['event_queue']);
 
-        $serializerId = 'happyr.deferred_event_simple_bus.service.message_serializer';
+        $serializerId = 'happyr.mq2php.service.message_serializer';
         if (!$config['enabled']) {
             $container->removeDefinition($serializerId);
             return;
