@@ -32,7 +32,7 @@ You should consider using the init script when you using it on the production se
 Install and enable this bundle
 
 ```bash
-comopser require happyr/mq2php-bundle
+composer require happyr/mq2php-bundle
 ```
 
 ```php
