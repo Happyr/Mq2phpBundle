@@ -21,7 +21,7 @@ background. Java is preferred because it is build to run for ever. (Compared wit
 
 ## Installation
 
-Fetch [mq2php.jar version 0.3.0](https://github.com/Happyr/mq2php/releases/download/0.3.0/mq2php-0.3.0.jar) or above and 
+Fetch [mq2php.jar version 0.3.2](https://github.com/Happyr/mq2php/releases/download/0.3.2/mq2php-0.3.2.jar) or above and 
 start the application with: 
 ```bash
 java -Dexecutor=fastcgi -DmessageQueue=rabbitmq -DqueueNames=asynchronous_commands,asynchronous_events -jar mq2php.jar
