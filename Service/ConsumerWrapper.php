@@ -39,16 +39,16 @@ class ConsumerWrapper implements LoggerAwareInterface
     private $logger;
 
     /**
-     * @param SerializedEnvelopeConsumer $commandConsumer
-     * @param SerializedEnvelopeConsumer $eventConsumer
      * @param string                     $commandQueueName
      * @param string                     $eventQueueName
+     * @param SerializedEnvelopeConsumer $commandConsumer
+     * @param SerializedEnvelopeConsumer $eventConsumer
      */
     public function __construct(
-        SerializedEnvelopeConsumer $commandConsumer,
-        SerializedEnvelopeConsumer $eventConsumer,
         $commandQueueName,
-        $eventQueueName
+        $eventQueueName,
+        SerializedEnvelopeConsumer $commandConsumer = null,
+        SerializedEnvelopeConsumer $eventConsumer = null
     ) {
         $this->commandConsumer = $commandConsumer;
         $this->eventConsumer = $eventConsumer;
@@ -84,7 +84,7 @@ class ConsumerWrapper implements LoggerAwareInterface
     /**
      * @param string $level
      * @param string $message
-     * @param array $context
+     * @param array  $context
      */
     private function log($level, $message, array $context = [])
     {
@@ -94,15 +94,28 @@ class ConsumerWrapper implements LoggerAwareInterface
     }
 
     /**
-     * Consume a message and make sure we log errors
+     * Consume a message and make sure we log errors.
      *
-     * @param string $queueName
-     * @param mixed $message
+     * @param string                     $queueName
+     * @param mixed                      $message
      * @param SerializedEnvelopeConsumer $consumer
+     *
      * @throws \Exception
      */
-    private function doConsume($queueName, $message, SerializedEnvelopeConsumer $consumer)
+    private function doConsume($queueName, $message, SerializedEnvelopeConsumer $consumer = null)
     {
+        if ($consumer === null) {
+            $this->log(
+                'error',
+                sprintf('No consumer was found for queue named "%s"', $queueName),
+                [
+                    'message' => $message,
+                ]
+            );
+
+            return;
+        }
+
         try {
             $consumer->consume($message);
         } catch (\Exception $e) {

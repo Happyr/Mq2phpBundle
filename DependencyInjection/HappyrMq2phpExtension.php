@@ -29,8 +29,8 @@ class HappyrMq2phpExtension extends Extension
 
         // Add the command and event queue names to the consumer wrapper
         $def = $container->getDefinition('happyr.mq2php.consumer_wrapper');
-        $def->replaceArgument(2, $config['command_queue'])
-            ->replaceArgument(3, $config['event_queue']);
+        $def->replaceArgument(0, $config['command_queue'])
+            ->replaceArgument(1, $config['event_queue']);
 
         $serializerId = 'happyr.mq2php.message_serializer';
         if (!$config['enabled']) {
@@ -54,12 +54,7 @@ class HappyrMq2phpExtension extends Extension
     {
         $enabledBundles = $container->getParameter('kernel.bundles');
         if (!isset($enabledBundles[$bundleName])) {
-            throw new \LogicException(
-                sprintf(
-                    'You need to enable "%s" as well',
-                    $bundleName
-                )
-            );
+            throw new \LogicException(sprintf('You need to enable "%s" as well', $bundleName));
         }
     }
 }

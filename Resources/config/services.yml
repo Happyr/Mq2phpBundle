@@ -18,7 +18,23 @@ services:
     calls:
        - [setLogger, ["@?logger"]]
     arguments:
-      - @simple_bus.asynchronous.standard_serialized_command_envelope_consumer
-      - @simple_bus.asynchronous.standard_serialized_event_envelope_consumer
       - ~
       - ~
+      - "@?happyr.mq2php.extendable_command_envelope_consumer"
+      - "@?happyr.mq2php.extendable_event_envelope_consumer"
+
+  happyr.mq2php.extendable_command_envelope_consumer:
+      class: Happyr\Mq2phpBundle\Consumer\ExtendableEnvelopeConsumer
+      public: false
+      arguments:
+          - '@simple_bus.asynchronous.message_serializer'
+          - ~
+          - '@event_dispatcher'
+
+  happyr.mq2php.extendable_event_envelope_consumer:
+      class: Happyr\Mq2phpBundle\Consumer\ExtendableEnvelopeConsumer
+      public: false
+      arguments:
+          - '@simple_bus.asynchronous.message_serializer'
+          - ~
+          - '@event_dispatcher'
