@@ -42,6 +42,7 @@ if (isset($_SERVER['DEFERRED_DATA'])) {
 
 if ($data === null) {
     trigger_error('No message data found', E_USER_WARNING);
+    http_response_code(400);
     exit(1);
 }
 
@@ -63,5 +64,12 @@ $input = new ArgvInput([$appPath.'console', 'happyr:mq2php:dispatch', $queueName
 
 $kernel = new AppKernel('prod', false);
 $application = new Application($kernel);
-$application->setAutoExit(true);
-$application->run($input);
+$application->setAutoExit(false);
+$exitCode = $application->run($input);
+
+if ($exitCode != 0) {
+    trigger_error('Exception was thrown when executing the command', E_USER_WARNING);
+    http_response_code(500);
+
+    exit($exitCode);
+}
