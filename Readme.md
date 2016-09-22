@@ -101,4 +101,15 @@ starting a new process to for each message is heavy.
 happyr_mq2php:
   message_headers: 
     dispatch_path: "%kernel.root_dir%/dispatch-message.php"
-```    
+```
+
+## Verify the message
+
+If you want to be sure that your message is valid and from your application you should define a secret key. This
+key is used to hash the message and then verify the hash on the receiving end. If you are using multiple applications
+you should make sure they all have the same secret key. 
+
+```
+happyr_mq2php:
+  secret_key: '4e10upv918856xxp7g9c'
+```
