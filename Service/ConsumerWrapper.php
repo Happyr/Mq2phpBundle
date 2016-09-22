@@ -70,6 +70,8 @@ class ConsumerWrapper implements LoggerAwareInterface
         } elseif ($queueName === $this->commandQueueName) {
             $this->doConsume($queueName, $message, $this->commandConsumer);
             $this->log('info', sprintf('Data from queue %s was consumed by the command consumer', $queueName));
+        } else {
+            $this->doConsume($queueName, $message);
         }
     }
 

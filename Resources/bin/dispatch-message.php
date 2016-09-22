@@ -42,27 +42,34 @@ if (isset($_SERVER['DEFERRED_DATA'])) {
 
 if ($data === null) {
     trigger_error('No message data found', E_USER_WARNING);
+    http_response_code(400);
     exit(1);
 }
 
 // Decode the message and get the data
-$message = base64_decode($data);
-$headers = array();
-$body = null;
-$lines = explode("\n", $message);
-foreach ($lines as $i => $line) {
-    if ($line == '') {
-        $body = $lines[$i + 1];
+$message = json_decode(base64_decode($data), true);
+$headers = $message['headers'];
+$body = $message['body'];
+
+$queueName = null;
+foreach ($headers as $header){
+    if ($header['key'] === 'queue_name') {
+        $queueName = $header['value'];
         break;
     }
-    list($name, $value) = explode(':', $line, 2);
-    $headers[$name] = trim($value);
 }
 
 // Prepare to call a Symfony command
-$input = new ArgvInput([$appPath.'console', 'happyr:mq2php:dispatch', $headers['queue_name'], $body]);
+$input = new ArgvInput([$appPath.'console', 'happyr:mq2php:dispatch', $queueName, $body]);
 
 $kernel = new AppKernel('prod', false);
 $application = new Application($kernel);
-$application->setAutoExit(true);
-$application->run($input);
+$application->setAutoExit(false);
+$exitCode = $application->run($input);
+
+if ($exitCode != 0) {
+    trigger_error('Exception was thrown when executing the command', E_USER_WARNING);
+    http_response_code(500);
+
+    exit($exitCode);
+}

@@ -16,10 +16,11 @@ class MessageSerializerDecoratorTest extends \PHPUnit_Framework_TestCase
         $service = new MessageSerializerDecorator($inner, ['foo' => 'bar', 'baz' => 'biz']);
         $result = $service->wrapAndSerialize('data');
 
-        $lines = explode("\n", $result);
-        $this->assertEquals('foo: bar', $lines[0]);
-        $this->assertEquals('baz: biz', $lines[1]);
-        $this->assertEquals('', $lines[2]);
-        $this->assertEquals('data', $lines[3]);
+        $array = json_decode($result, true);
+        $this->assertEquals('foo', $array['headers'][0]['key']);
+        $this->assertEquals('bar', $array['headers'][0]['value']);
+        $this->assertEquals('baz', $array['headers'][1]['key']);
+        $this->assertEquals('biz', $array['headers'][1]['value']);
+        $this->assertEquals('data', $array['body']);
     }
 }

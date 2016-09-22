@@ -25,6 +25,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('event_queue')->defaultValue('asynchronous_events')->end()
                 ->arrayNode('message_headers')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('http_url')->defaultNull()->end()
                         ->scalarNode('php_bin')->defaultNull()->end()
                         ->scalarNode('dispatch_path')->defaultNull()->end()
                         ->scalarNode('fastcgi_host')->cannotBeEmpty()->defaultValue('localhost')->end()

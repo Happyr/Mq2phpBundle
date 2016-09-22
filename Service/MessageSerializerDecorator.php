@@ -42,17 +42,17 @@ class MessageSerializerDecorator implements MessageInEnvelopSerializer, HeaderAw
     {
         $serializedMessage = $this->serializer->wrapAndSerialize($message);
 
-        $message = '';
+        $message = [];
         foreach ($this->headers as $name => $value) {
             if (empty($value)) {
                 continue;
             }
 
-            $message .= sprintf("%s: %s\n", $name, $value);
+            $message['headers'][]=['key'=>$name, 'value'=>$value];
         }
-        $message .= "\n".$serializedMessage;
+        $message['body'] = $serializedMessage;
 
-        return $message;
+        return json_encode($message);
     }
 
     /**
