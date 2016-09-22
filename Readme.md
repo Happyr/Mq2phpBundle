@@ -113,3 +113,16 @@ you should make sure they all have the same secret key.
 happyr_mq2php:
   secret_key: '4e10upv918856xxp7g9c'
 ```
+
+## Reduce the number of messages
+
+In the SimpleBus documentation you may find that all events will be handled synchronous then 
+asynchronous. That means that for every event your application dispatches there will be an async message. If
+you want to reduce the number of messages you may configure the SimpleBus AsyncBundle to only handle those events
+that are marked as asynchronous. 
+
+```yaml
+simple_bus_asynchronous:
+  events:
+    strategy: 'predefined'
+```
