@@ -23,6 +23,7 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('enabled')->defaultTrue()->end()
                 ->scalarNode('command_queue')->defaultValue('asynchronous_commands')->end()
                 ->scalarNode('event_queue')->defaultValue('asynchronous_events')->end()
+                ->scalarNode('secret_key')->defaultNull()->info('The secret key is used to verify that the message is valid.')->end()
                 ->arrayNode('message_headers')->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('http_url')->defaultNull()->end()

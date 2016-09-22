@@ -22,14 +22,23 @@ class MessageDispatchCommand extends ContainerAwareCommand
             ->setDescription('Dispatch a message from a queue to simple bus')
             ->addArgument('queue', InputArgument::REQUIRED, 'The name of the queue')
             ->addArgument('data', InputArgument::REQUIRED, 'A serialized event to dispatch')
+            ->addArgument('hash', InputArgument::OPTIONAL, 'A hash that could be used to verify the message is valid')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->getContainer()->get('happyr.mq2php.consumer_wrapper')->consume(
-            $input->getArgument('queue'),
-            $input->getArgument('data')
-        );
+        $data = $input->getArgument('data');
+        $queueName = $input->getArgument('queue');
+        $hash = $input->getArgument('hash');
+        $secretKey = $this->getContainer()->getParameter('happyr.mq2php.secret_key');
+
+        if (!empty($secretKey)) {
+            if (!hash_equals(sha1($secretKey.$data), $hash)) {
+                throw new \Exception('Hash verification failed');
+            }
+        }
+
+        $this->getContainer()->get('happyr.mq2php.consumer_wrapper')->consume($queueName, $data);
     }
 }
