@@ -21,7 +21,7 @@ background. Java is preferred because it is build to run for ever. (Compared wit
 
 ## Installation
 
-Fetch [mq2php.jar version 0.4.0](https://github.com/Happyr/mq2php/releases) or above and 
+Fetch [mq2php.jar version 0.5.0](https://github.com/Happyr/mq2php/releases) or above and 
 start the application with: 
 ```bash
 java -Dexecutor=fastcgi -DmessageQueue=rabbitmq -DqueueNames=asynchronous_commands,asynchronous_events -jar mq2php.jar
@@ -79,4 +79,26 @@ happyr_mq2php:
   message_headers: 
     fastcgi_host: localhost
     fastcgi_port: 9000
+    dispatch_path: "%kernel.root_dir%/dispatch-message.php"
+```    
+
+### HTTP executor
+
+If you are not using fastcgi (eg PHP-FPM) you may use HTTP.
+
+```
+happyr_mq2php:
+  message_headers: 
+    http_url: https://example.com/dispatch-message.php
+```   
+
+### Shell executor
+
+When debugging you may want to use the shell executor. This will require more CPU resources by mq2php since
+starting a new process to for each message is heavy. 
+
+```
+happyr_mq2php:
+  message_headers: 
+    dispatch_path: "%kernel.root_dir%/dispatch-message.php"
 ```    
