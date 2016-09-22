@@ -50,17 +50,19 @@ if ($data === null) {
 $message = json_decode(base64_decode($data), true);
 $headers = $message['headers'];
 $body = $message['body'];
-
 $queueName = null;
+$hash = null;
 foreach ($headers as $header){
     if ($header['key'] === 'queue_name') {
         $queueName = $header['value'];
-        break;
+    }
+    if ($header['key'] === 'hash') {
+        $hash = $header['value'];
     }
 }
 
 // Prepare to call a Symfony command
-$input = new ArgvInput([$appPath.'console', 'happyr:mq2php:dispatch', $queueName, $body]);
+$input = new ArgvInput([$appPath.'console', 'happyr:mq2php:dispatch', $queueName, $body, $hash]);
 
 $kernel = new AppKernel('prod', false);
 $application = new Application($kernel);
