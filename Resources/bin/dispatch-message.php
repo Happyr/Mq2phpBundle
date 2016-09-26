@@ -47,7 +47,7 @@ if ($data === null) {
 }
 
 // Decode the message and get the data
-$message = json_decode(base64_decode($data), true);
+$message = json_decode($data, true);
 $headers = $message['headers'];
 $body = $message['body'];
 $queueName = null;
