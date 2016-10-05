@@ -2,7 +2,6 @@
 
 namespace Happyr\Mq2phpBundle\Event;
 
-use SimpleBus\Serialization\Envelope\Envelope;
 use Symfony\Component\EventDispatcher\Event;
 
 /**

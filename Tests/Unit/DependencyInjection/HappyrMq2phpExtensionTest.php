@@ -9,8 +9,9 @@ class HappyrMq2phpExtensionTest extends AbstractExtensionTestCase
 {
     protected function getMinimalConfiguration()
     {
-        $this->setParameter('kernel.bundles', ['SimpleBusAsynchronousBundle'=>true]);
-        return ['enabled'=>true];
+        $this->setParameter('kernel.bundles', ['SimpleBusAsynchronousBundle' => true]);
+
+        return ['enabled' => true];
     }
 
     public function testServicesRegisteredAfterLoading()
@@ -23,8 +24,8 @@ class HappyrMq2phpExtensionTest extends AbstractExtensionTestCase
 
     protected function getContainerExtensions()
     {
-        return array(
+        return [
             new HappyrMq2phpExtension(),
-        );
+        ];
     }
 }

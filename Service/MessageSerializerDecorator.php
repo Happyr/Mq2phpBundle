@@ -4,7 +4,6 @@ namespace Happyr\Mq2phpBundle\Service;
 
 use Happyr\Mq2phpBundle\Event\PrePublishMessage;
 use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer;
-use SimpleBus\Serialization\Envelope\Serializer\StandardMessageInEnvelopeSerializer;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -43,7 +42,7 @@ class MessageSerializerDecorator implements MessageInEnvelopSerializer, HeaderAw
     public function __construct(
         MessageInEnvelopSerializer $serializer,
         EventDispatcherInterface $eventDispatcher,
-        array $headers = array(),
+        array $headers = [],
         $secretKey = null
     ) {
         $this->serializer = $serializer;
