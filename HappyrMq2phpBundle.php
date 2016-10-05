@@ -12,5 +12,4 @@ class HappyrMq2phpBundle extends Bundle
     {
         $container->addCompilerPass(new RegisterConsumers());
     }
-
 }

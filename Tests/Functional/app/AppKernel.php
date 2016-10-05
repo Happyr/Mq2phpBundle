@@ -20,11 +20,11 @@ class AppKernel extends Kernel
 
         $fs = new Filesystem();
 
-        if ( ! $fs->isAbsolutePath($config)) {
+        if (!$fs->isAbsolutePath($config)) {
             $config = __DIR__.'/config/'.$config;
         }
 
-        if ( ! file_exists($config)) {
+        if (!file_exists($config)) {
             throw new \RuntimeException(sprintf('The config file "%s" does not exist', $config));
         }
 
@@ -33,13 +33,13 @@ class AppKernel extends Kernel
 
     public function registerBundles()
     {
-        return array(
+        return [
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new SimpleBusAsynchronousBundle(),
             new SimpleBusJMSSerializerBundleBridgeBundle(),
             new JMSSerializerBundle(),
             new HappyrMq2phpBundle(),
-        );
+        ];
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)
