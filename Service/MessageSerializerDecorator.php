@@ -15,7 +15,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class MessageSerializerDecorator implements MessageInEnvelopSerializer, HeaderAwareInterface
 {
     /**
-     * @var StandardMessageInEnvelopeSerializer
+     * @var MessageInEnvelopSerializer
      */
     private $serializer;
 
