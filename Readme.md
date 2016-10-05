@@ -1,5 +1,13 @@
 # Mq2phpBundle for real asynchronous messages
 
+[![Latest Version](https://img.shields.io/github/release/Happyr/Mq2phpBundle.svg?style=flat-square)](https://github.com/Happyr/Mq2phpBundle/releases)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![Build Status](https://img.shields.io/travis/Happyr/Mq2phpBundle.svg?style=flat-square)](https://travis-ci.org/Happyr/Mq2phpBundle)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/Happyr/Mq2phpBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/Happyr/Mq2phpBundle)
+[![Quality Score](https://img.shields.io/scrutinizer/g/Happyr/Mq2phpBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/Happyr/Mq2phpBundle)
+[![Total Downloads](https://img.shields.io/packagist/dt/happyr/mq2php-bundle.svg?style=flat-square)](https://packagist.org/packages/happyr/mq2php-bundle)
+
+
 This bundle is a bridge between [SimpleBus](http://simplebus.github.io/MessageBus/) and [mq2php](https://github.com/Happyr/mq2php). 
 It could be used together with the [SimpleBusAsynchronousBundle](http://simplebus.github.io/AsynchronousBundle/doc/getting_started.html)
 to make the asynchronous messages independent of a cron job to consume the messages. Instead we utilize the 

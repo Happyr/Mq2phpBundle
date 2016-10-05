@@ -1,6 +1,6 @@
 <?php
 
-namespace Happyr\Mq2phpBundle\Tests\Service;
+namespace Happyr\Mq2phpBundle\Tests\Unit\Service;
 
 use Happyr\Mq2phpBundle\Service\MessageSerializerDecorator;
 
@@ -13,7 +13,10 @@ class MessageSerializerDecoratorTest extends \PHPUnit_Framework_TestCase
         $inner->method('wrapAndSerialize')
             ->willReturnArgument(0);
 
-        $service = new MessageSerializerDecorator($inner, ['foo' => 'bar', 'baz' => 'biz']);
+        $eventDispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcherInterface')
+            ->getMock();
+
+        $service = new MessageSerializerDecorator($inner, $eventDispatcher, ['foo' => 'bar', 'baz' => 'biz']);
         $result = $service->wrapAndSerialize('data');
 
         $array = json_decode($result, true);
