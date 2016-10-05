@@ -13,10 +13,10 @@ class MessageSerializerDecoratorTest extends \PHPUnit_Framework_TestCase
         $inner->method('wrapAndSerialize')
             ->willReturnArgument(0);
 
-        $inner = $this->getMockBuilder('SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer')
+        $eventDispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcherInterface')
             ->getMock();
 
-        $service = new MessageSerializerDecorator($inner, ['foo' => 'bar', 'baz' => 'biz']);
+        $service = new MessageSerializerDecorator($inner, $eventDispatcher, ['foo' => 'bar', 'baz' => 'biz']);
         $result = $service->wrapAndSerialize('data');
 
         $array = json_decode($result, true);

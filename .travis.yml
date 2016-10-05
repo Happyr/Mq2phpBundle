@@ -20,6 +20,7 @@ env:
     - SYMFONY_VERSION=3.0.*
     - SYMFONY_VERSION=2.8.*
     - SYMFONY_VERSION=2.7.*
+
 matrix:
   fast_finish: true
   include:
@@ -36,5 +37,3 @@ script:
 after_success:
     - if [[ $COVERAGE = true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
     - if [[ $COVERAGE = true ]]; then php ocular.phar code-coverage:upload --format=php-clover build/coverage.xml; fi
-
-

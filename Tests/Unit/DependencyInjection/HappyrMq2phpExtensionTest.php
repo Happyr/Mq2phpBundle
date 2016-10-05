@@ -9,6 +9,7 @@ class HappyrMq2phpExtensionTest extends AbstractExtensionTestCase
 {
     protected function getMinimalConfiguration()
     {
+        $this->setParameter('kernel.bundles', ['SimpleBusAsynchronousBundle'=>true]);
         return ['enabled'=>true];
     }
 
