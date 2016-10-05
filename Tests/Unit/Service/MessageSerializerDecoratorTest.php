@@ -13,6 +13,9 @@ class MessageSerializerDecoratorTest extends \PHPUnit_Framework_TestCase
         $inner->method('wrapAndSerialize')
             ->willReturnArgument(0);
 
+        $inner = $this->getMockBuilder('SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer')
+            ->getMock();
+
         $service = new MessageSerializerDecorator($inner, ['foo' => 'bar', 'baz' => 'biz']);
         $result = $service->wrapAndSerialize('data');
 
