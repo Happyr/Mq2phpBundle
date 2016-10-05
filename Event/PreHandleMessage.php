@@ -5,6 +5,11 @@ namespace Happyr\Mq2phpBundle\Event;
 use SimpleBus\Serialization\Envelope\Envelope;
 use Symfony\Component\EventDispatcher\Event;
 
+/**
+ * Before we start to receive a message.
+ *
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ */
 class PreHandleMessage extends Event
 {
     const NAME = 'happyr.mq2php.pre_handle_message';

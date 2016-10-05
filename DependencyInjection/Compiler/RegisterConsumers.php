@@ -29,12 +29,8 @@ class RegisterConsumers implements CompilerPassInterface
      */
     private function replaceArgumentWithReference(ContainerBuilder $container, $serviceId, $referenceId)
     {
-        if (!$container->hasDefinition($serviceId)) {
+        if (!$container->hasDefinition($serviceId) || !$container->hasDefinition($referenceId)) {
             return;
-        }
-
-        if (!$container->hasDefinition($referenceId)) {
-            $container->removeDefinition($serviceId);
         }
 
         $container->getDefinition($serviceId)->replaceArgument(1, new Reference($referenceId));
