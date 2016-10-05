@@ -1,6 +1,6 @@
 <?php
 
-namespace Happyr\Mq2phpBundle\Tests\Service;
+namespace Happyr\Mq2phpBundle\Tests\Unit\Service;
 
 use Happyr\Mq2phpBundle\Service\MessageSerializerDecorator;
 
