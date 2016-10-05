@@ -3,7 +3,7 @@ services:
   happyr.mq2php.message_serializer:
     class: Happyr\Mq2phpBundle\Service\MessageSerializerDecorator
     configurator: [ "@happyr.mq2php.di.message_header_configurator" , configure]
-    arguments: ["@happyr.mq2php.message_serializer.inner", ~, "%happyr.mq2php.secret_key%"]
+    arguments: ["@happyr.mq2php.message_serializer.inner", "@event_dispatcher", ~, "%happyr.mq2php.secret_key%"]
     decorates: 'simple_bus.asynchronous.message_serializer'
 
   happyr.mq2php.di.message_header_configurator:

@@ -2,8 +2,10 @@
 
 namespace Happyr\Mq2phpBundle\Service;
 
+use Happyr\Mq2phpBundle\Event\PrePublishMessage;
 use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer;
 use SimpleBus\Serialization\Envelope\Serializer\StandardMessageInEnvelopeSerializer;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * This service adds some extra headers on the message envelope.
@@ -28,13 +30,24 @@ class MessageSerializerDecorator implements MessageInEnvelopSerializer, HeaderAw
     private $secretKey;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    /**
      * @param MessageInEnvelopSerializer $serializer
      * @param array                      $headers
      * @param string                     $secretKey
+     * @param EventDispatcherInterface   $eventDispatcher
      */
-    public function __construct(MessageInEnvelopSerializer $serializer, array $headers = array(), $secretKey = null)
-    {
+    public function __construct(
+        MessageInEnvelopSerializer $serializer,
+        EventDispatcherInterface $eventDispatcher,
+        array $headers = array(),
+        $secretKey = null
+    ) {
         $this->serializer = $serializer;
+        $this->eventDispatcher = $eventDispatcher;
         $this->headers = $headers;
         $this->secretKey = empty($secretKey) ? '' : $secretKey;
     }
@@ -62,7 +75,10 @@ class MessageSerializerDecorator implements MessageInEnvelopSerializer, HeaderAw
         // Add a hash where the secret key is baked in.
         $message['headers'][] = ['key' => 'hash', 'value' => sha1($this->secretKey.$serializedMessage)];
 
-        return json_encode($message);
+        $event = new PrePublishMessage($message);
+        $this->eventDispatcher->dispatch(PrePublishMessage::NAME, $event);
+
+        return json_encode($event->getMessage());
     }
 
     /**
