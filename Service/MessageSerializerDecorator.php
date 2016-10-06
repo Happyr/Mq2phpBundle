@@ -52,14 +52,14 @@ class MessageSerializerDecorator implements MessageInEnvelopSerializer, HeaderAw
     }
 
     /**
-     * Serialize a Message by wrapping it in an Envelope and serializing the envelope. This will take the
-     * SimpleBus envelope and add it as body on a HTTP-like message.
+     * Serialize a Message by wrapping it in an Envelope and serializing the envelope. This decoration will
+     * take the SimpleBus envelope and add it in a json message.
      *
      * {@inheritdoc}
      */
-    public function wrapAndSerialize($message)
+    public function wrapAndSerialize($originalMessage)
     {
-        $serializedMessage = $this->serializer->wrapAndSerialize($message);
+        $serializedMessage = $this->serializer->wrapAndSerialize($originalMessage);
 
         $message = [];
         foreach ($this->headers as $name => $value) {
@@ -74,7 +74,7 @@ class MessageSerializerDecorator implements MessageInEnvelopSerializer, HeaderAw
         // Add a hash where the secret key is baked in.
         $message['headers'][] = ['key' => 'hash', 'value' => sha1($this->secretKey.$serializedMessage)];
 
-        $event = new PrePublishMessage($message);
+        $event = new PrePublishMessage($message, is_object($originalMessage) ? get_class($originalMessage) : gettype($originalMessage));
         $this->eventDispatcher->dispatch(PrePublishMessage::NAME, $event);
 
         return json_encode($event->getMessage());

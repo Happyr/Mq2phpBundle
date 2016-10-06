@@ -1,5 +1,12 @@
 imports:
     - { resource: framework.yml }
+    - { resource: services.yml }
 
 happyr_mq2php:
   enabled: true
+
+simple_bus_asynchronous:
+  events:
+    publisher_service_id: 'happyr.mq2php.dummy_publisher'
+  commands:
+    publisher_service_id: 'happyr.mq2php.dummy_publisher'

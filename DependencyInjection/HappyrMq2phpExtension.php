@@ -41,7 +41,7 @@ class HappyrMq2phpExtension extends Extension
 
         // Add default headers to the serializer
         $def = $container->getDefinition($serializerId);
-        $def->replaceArgument(1, $config['message_headers']);
+        $def->replaceArgument(2, $config['message_headers']);
 
         // Add the secret key as parameter
         $container->setParameter('happyr.mq2php.secret_key', $config['secret_key']);

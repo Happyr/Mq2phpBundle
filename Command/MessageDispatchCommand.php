@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * A command that wil be called by dispatch-message.php.
+ * A command that will be called by dispatch-message.php.
  * It will give a SimpleBus message envelope to the ConsumerWrapper.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -34,6 +34,7 @@ class MessageDispatchCommand extends ContainerAwareCommand
         $secretKey = $this->getContainer()->getParameter('happyr.mq2php.secret_key');
 
         if (!empty($secretKey)) {
+            // If we have a secret key we must validate the hash
             if (!hash_equals(sha1($secretKey.$data), $hash)) {
                 throw new \Exception('Hash verification failed');
             }

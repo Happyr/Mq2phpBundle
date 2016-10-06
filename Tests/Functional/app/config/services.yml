@@ -1,0 +1,6 @@
+services:
+    happyr.mq2php.dummy_publisher:
+        class: Happyr\Mq2phpBundle\Tests\Functional\app\Service\DummyPublisher
+
+    logger:
+        class: Happyr\Mq2phpBundle\Tests\Functional\app\Service\DummyLogger

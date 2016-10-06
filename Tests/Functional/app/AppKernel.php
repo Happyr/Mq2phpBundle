@@ -6,6 +6,8 @@ use Happyr\Mq2phpBundle\HappyrMq2phpBundle;
 use JMS\SerializerBundle\JMSSerializerBundle;
 use SimpleBus\AsynchronousBundle\SimpleBusAsynchronousBundle;
 use SimpleBus\JMSSerializerBundleBridge\SimpleBusJMSSerializerBundleBridgeBundle;
+use SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle;
+use SimpleBus\SymfonyBridge\SimpleBusEventBusBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Kernel;
@@ -35,6 +37,8 @@ class AppKernel extends Kernel
     {
         return [
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new SimpleBusCommandBusBundle(),
+            new SimpleBusEventBusBundle(),
             new SimpleBusAsynchronousBundle(),
             new SimpleBusJMSSerializerBundleBridgeBundle(),
             new JMSSerializerBundle(),
