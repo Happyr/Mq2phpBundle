@@ -44,8 +44,6 @@ class AppKernel extends Kernel
             new SimpleBusCommandBusBundle(),
             new SimpleBusEventBusBundle(),
             new SimpleBusAsynchronousBundle(),
-            new SimpleBusRabbitMQBundleBridgeBundle(),
-            new OldSoundRabbitMqBundle(),
             new SimpleBusJMSSerializerBundleBridgeBundle(),
             new JMSSerializerBundle(),
             new HappyrMq2phpBundle(),
