@@ -19,7 +19,8 @@
         "phpunit/phpunit": "^4.5 || ^5.4",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
         "symfony/symfony": "^2.3 || ^3.0",
-        "simple-bus/jms-serializer-bundle-bridge": "^2.0"
+        "simple-bus/jms-serializer-bundle-bridge": "^2.0",
+        "simple-bus/rabbitmq-bundle-bridge": "^2.2"
     },
     "autoload": {
         "psr-4": { "Happyr\\Mq2phpBundle\\": "" }
