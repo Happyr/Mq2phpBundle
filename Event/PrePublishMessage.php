@@ -14,16 +14,25 @@ class PrePublishMessage extends Event
     const NAME = 'happyr.mq2php.pre_publish_message';
 
     /**
+     * This is the json message before we run json_encode.
      * @var array
      */
     private $message;
 
     /**
-     * @param array $message
+     * The class/type from the original message (command/event).
+     * @var string
      */
-    public function __construct(array $message)
+    private $type;
+
+    /**
+     * @param array  $message
+     * @param string $type
+     */
+    public function __construct(array $message, $type)
     {
         $this->message = $message;
+        $this->type = $type;
     }
 
     /**
@@ -44,5 +53,13 @@ class PrePublishMessage extends Event
         $this->message = $message;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }
