@@ -9,6 +9,10 @@ The change log describes what is "Added", "Removed", "Changed" or "Fixed" betwee
 - A type property was added to `PrePublishMessage`. 
 - Lots of code style changes
 
+### Fixed
+
+- Bug when configure the Serializer
+
 ## 0.2.1
 
 ### Added 
