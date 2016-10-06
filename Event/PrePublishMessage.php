@@ -15,12 +15,14 @@ class PrePublishMessage extends Event
 
     /**
      * This is the json message before we run json_encode.
+     *
      * @var array
      */
     private $message;
 
     /**
      * The class/type from the original message (command/event).
+     *
      * @var string
      */
     private $type;
