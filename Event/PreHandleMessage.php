@@ -6,7 +6,7 @@ use SimpleBus\Serialization\Envelope\Envelope;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Before we start to receive a message.
+ * A message has been pulled from the queue and we are just about to start handling that message.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
