@@ -40,7 +40,6 @@ class AppKernel extends Kernel
     {
         return [
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new MonologBundle(),
             new SimpleBusCommandBusBundle(),
             new SimpleBusEventBusBundle(),
             new SimpleBusAsynchronousBundle(),
