@@ -4,10 +4,8 @@ namespace Happyr\Mq2phpBundle\Tests\Functional\app;
 
 use Happyr\Mq2phpBundle\HappyrMq2phpBundle;
 use JMS\SerializerBundle\JMSSerializerBundle;
-use OldSound\RabbitMqBundle\OldSoundRabbitMqBundle;
 use SimpleBus\AsynchronousBundle\SimpleBusAsynchronousBundle;
 use SimpleBus\JMSSerializerBundleBridge\SimpleBusJMSSerializerBundleBridgeBundle;
-use SimpleBus\RabbitMQBundleBridge\SimpleBusRabbitMQBundleBridgeBundle;
 use SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle;
 use SimpleBus\SymfonyBridge\SimpleBusEventBusBundle;
 use Symfony\Bundle\MonologBundle\MonologBundle;
