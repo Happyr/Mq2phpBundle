@@ -107,15 +107,10 @@ class ConsumerWrapper implements LoggerAwareInterface
     private function doConsume($queueName, $message, SerializedEnvelopeConsumer $consumer = null)
     {
         if ($consumer === null) {
-            $this->log(
-                'error',
-                sprintf('No consumer was found for queue named "%s"', $queueName),
-                [
-                    'message' => $message,
-                ]
-            );
+            $exceptionMessage = sprintf('No consumer was found for queue named "%s"', $queueName);
+            $this->log('alert', $exceptionMessage, ['message' => $message]);
 
-            return;
+            throw new \RuntimeException($exceptionMessage);
         }
 
         try {

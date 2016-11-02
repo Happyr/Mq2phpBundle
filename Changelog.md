@@ -2,6 +2,12 @@
 
 The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release. 
 
+## 0.2.3
+
+### Added
+
+- If no consumer is found we throw an exception to make sure we requeue the message. 
+
 ## 0.2.2
 
 ### Added 
