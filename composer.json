@@ -13,6 +13,7 @@
         "php": "^5.6 || ^7.0",
         "psr/log": "~1.0",
         "simple-bus/asynchronous-bundle":"^2.0",
+        "symfony/framework-bundle": "^2.7 || ^3.0",
         "symfony/event-dispatcher": "^2.3 || ^3.0"
     },
     "require-dev": {
