@@ -52,7 +52,7 @@ $headers = $message['headers'];
 $body = $message['body'];
 $queueName = null;
 $hash = null;
-foreach ($headers as $header){
+foreach ($headers as $header) {
     if ($header['key'] === 'queue_name') {
         $queueName = $header['value'];
     }
