@@ -32,6 +32,9 @@ class HappyrMq2phpExtension extends Extension
         $def->replaceArgument(0, $config['command_queue'])
             ->replaceArgument(1, $config['event_queue']);
 
+        $container->setParameter('happyr.mq2php.command_queue_name', $config['command_queue']);
+        $container->setParameter('happyr.mq2php.event_queue_name', $config['event_queue']);
+
         $serializerId = 'happyr.mq2php.message_serializer';
         if (!$config['enabled']) {
             $container->removeDefinition($serializerId);
