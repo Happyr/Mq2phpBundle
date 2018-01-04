@@ -4,3 +4,11 @@ services:
 
     logger:
         class: Happyr\Mq2phpBundle\Tests\Functional\app\Service\DummyLogger
+
+    test.happyr.mq2php.message_serializer:
+      alias: happyr.mq2php.message_serializer
+      public: true
+
+    test.happyr.mq2php.consumer_wrapper:
+      alias: happyr.mq2php.consumer_wrapper
+      public: true

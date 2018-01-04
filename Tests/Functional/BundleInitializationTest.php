@@ -11,12 +11,12 @@ class BundleInitializationTest extends BaseTestCase
     {
         static::bootKernel();
         $container = static::$kernel->getContainer();
-        $this->assertTrue($container->has('happyr.mq2php.message_serializer'));
-        $client = $container->get('happyr.mq2php.message_serializer');
+        $this->assertTrue($container->has('test.happyr.mq2php.message_serializer'));
+        $client = $container->get('test.happyr.mq2php.message_serializer');
         $this->assertInstanceOf(MessageSerializerDecorator::class, $client);
 
-        $this->assertTrue($container->has('happyr.mq2php.consumer_wrapper'));
-        $client = $container->get('happyr.mq2php.consumer_wrapper');
+        $this->assertTrue($container->has('test.happyr.mq2php.consumer_wrapper'));
+        $client = $container->get('test.happyr.mq2php.consumer_wrapper');
         $this->assertInstanceOf(ConsumerWrapper::class, $client);
     }
 }
