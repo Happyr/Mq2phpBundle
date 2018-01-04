@@ -30,7 +30,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('php_bin')->defaultNull()->end()
                         ->scalarNode('dispatch_path')->defaultNull()->end()
                         ->scalarNode('fastcgi_host')->cannotBeEmpty()->defaultValue('localhost')->end()
-                        ->integerNode('fastcgi_port')->defaultValue(9000)->end()
+                        ->scalarNode('fastcgi_port')->defaultValue(9000)->end()
                     ->end()
                     ->end()
             ->end();
