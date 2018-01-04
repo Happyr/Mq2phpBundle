@@ -3,12 +3,13 @@
 namespace Happyr\Mq2phpBundle\Tests\Unit\Service;
 
 use Happyr\Mq2phpBundle\Service\MessageSerializerDecorator;
+use PHPUnit\Framework\TestCase;
 
-class MessageSerializerDecoratorTest extends \PHPUnit_Framework_TestCase
+class MessageSerializerDecoratorTest extends TestCase
 {
     public function testWrapAndSerialize()
     {
-        $inner = $this->getMockBuilder('SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer')
+        $inner = $this->getMockBuilder('SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer')
             ->getMock();
         $inner->method('wrapAndSerialize')
             ->willReturnArgument(0);

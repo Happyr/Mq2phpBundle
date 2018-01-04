@@ -3,7 +3,7 @@
 namespace Happyr\Mq2phpBundle\Consumer;
 
 use Happyr\Mq2phpBundle\Event\PreHandleMessage;
-use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer;
+use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer;
 use SimpleBus\Message\Bus\MessageBus;
 use SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer as SimpleBusSerializedEnvelopeConsumer;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class ExtendableEnvelopeConsumer implements SimpleBusSerializedEnvelopeConsumer
 {
     /**
-     * @var MessageInEnvelopSerializer
+     * @var MessageInEnvelopeSerializer
      */
     private $messageInEnvelopeSerializer;
 
@@ -29,12 +29,12 @@ class ExtendableEnvelopeConsumer implements SimpleBusSerializedEnvelopeConsumer
     private $dispathcer;
 
     /**
-     * @param MessageInEnvelopSerializer $messageInEnvelopeSerializer
+     * @param MessageInEnvelopeSerializer $messageInEnvelopeSerializer
      * @param MessageBus                 $messageBus
      * @param EventDispatcherInterface   $dispathcer
      */
     public function __construct(
-        MessageInEnvelopSerializer $messageInEnvelopeSerializer,
+        MessageInEnvelopeSerializer $messageInEnvelopeSerializer,
         MessageBus $messageBus,
         EventDispatcherInterface $dispathcer
     ) {
