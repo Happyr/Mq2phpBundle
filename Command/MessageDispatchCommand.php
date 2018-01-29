@@ -15,10 +15,11 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class MessageDispatchCommand extends ContainerAwareCommand
 {
+    protected static $defaultName = 'happyr:mq2php:dispatch';
+
     protected function configure()
     {
         $this
-            ->setName('happyr:mq2php:dispatch')
             ->setDescription('Dispatch a message from a queue to simple bus')
             ->addArgument('queue', InputArgument::REQUIRED, 'The name of the queue')
             ->addArgument('data', InputArgument::REQUIRED, 'A serialized event to dispatch')
