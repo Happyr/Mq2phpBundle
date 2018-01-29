@@ -39,5 +39,6 @@ services:
 
   happyr.mq2php.command.dispatch:
       class: Happyr\Mq2phpBundle\Command\MessageDispatchCommand
+      arguments: ['@happyr.mq2php.consumer_wrapper', '%happyr.mq2php.secret_key%']
       tags:
-            - { name: 'console.command', command: 'happyr:mq2php:dispatch' }
+          - { name: 'console.command', command: 'happyr:mq2php:dispatch' }

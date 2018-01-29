@@ -2,9 +2,10 @@
 
 namespace Happyr\Mq2phpBundle\Command;
 
+use Happyr\Mq2phpBundle\Service\ConsumerWrapper;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -16,6 +17,28 @@ use Symfony\Component\Console\Output\OutputInterface;
 class MessageDispatchCommand extends ContainerAwareCommand
 {
     protected static $defaultName = 'happyr:mq2php:dispatch';
+
+    /**
+     * @var ConsumerWrapper
+     */
+    private $consumer;
+
+    /**
+     * @var string
+     */
+    private $secretKey;
+
+    /**
+     * @param ConsumerWrapper $consumer
+     * @param string          $secretKey
+     */
+    public function __construct(ConsumerWrapper $consumer, $secretKey)
+    {
+        $this->consumer = $consumer;
+        $this->secretKey = $secretKey;
+
+        parent::__construct();
+    }
 
     protected function configure()
     {
@@ -32,15 +55,14 @@ class MessageDispatchCommand extends ContainerAwareCommand
         $data = $input->getArgument('data');
         $queueName = $input->getArgument('queue');
         $hash = $input->getArgument('hash');
-        $secretKey = $this->getContainer()->getParameter('happyr.mq2php.secret_key');
 
-        if (!empty($secretKey)) {
+        if (!empty($this->secretKey)) {
             // If we have a secret key we must validate the hash
-            if (!hash_equals(sha1($secretKey.$data), $hash)) {
+            if (!hash_equals(sha1($this->secretKey.$data), $hash)) {
                 throw new \Exception('Hash verification failed');
             }
         }
 
-        $this->getContainer()->get('happyr.mq2php.consumer_wrapper')->consume($queueName, $data);
+        $this->consumer->consume($queueName, $data);
     }
 }
