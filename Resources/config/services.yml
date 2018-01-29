@@ -36,3 +36,8 @@ services:
           - '@simple_bus.asynchronous.message_serializer'
           - ~
           - '@event_dispatcher'
+
+  happyr.mq2php.command.dispatch:
+      class: Happyr\Mq2phpBundle\Command\MessageDispatchCommand
+      tags:
+            - { name: 'console.command', command: 'happyr:mq2php:dispatch' }
